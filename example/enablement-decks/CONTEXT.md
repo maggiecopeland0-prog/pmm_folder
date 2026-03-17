@@ -1,59 +1,43 @@
 # enablement-decks/CONTEXT.md
-*Layer 2  -  Stage contract. Read this after CLAUDE.md and CONTEXT.md.*
+*Layer 2 - Stage contract.*
 
 ---
 
 ## What This Workspace Does
 
-Produces sales enablement materials: training decks, FAQ documents, quick-reference cards, and onboarding guides. Content targets internal teams who need to understand, position, and support products.
+Produces sales enablement materials: training decks, FAQ docs, and quick-reference cards for internal teams.
 
 ---
 
 ## Inputs
 
 ### Always load from _config/
-- `voice.md`  -  tone and formatting
-- `terminology.md`  -  product name rules
-- `audiences.md`  -  audience profiles and mixed-audience rules
+- `voice.md`
+- `terminology.md`
+- `audiences.md`
 
-### Layer 4  -  working inputs (provided per run)
+### Per run
 - Feature description or PRD
 - Target audience (Sales, CS, SC, or mixed)
-- Format: slide deck, FAQ doc, or quick-reference card
+- Format: deck, FAQ, or quick-reference card
 
 ---
 
 ## Process
 
-### Step 1  -  Identify the audience
-Determine who this is for. If mixed, plan the document structure so each audience gets labeled sections.
-
-### Step 2  -  Extract key messages
-From the source material, pull out:
-- What the feature does (plain language)
-- Why it matters to each audience
-- Common questions the audience will have
-- Competitive context (if relevant)
-
-### Step 3  -  Structure the deliverable
-- **Decks:** One idea per slide. Headlines are complete sentences that state the point. Bullets support, not repeat.
-- **FAQ docs:** Group by audience. Lead with [All] questions. Use the exact words customers and reps would use.
-- **Quick-reference cards:** Single page. Three sections max. Scannable in under 60 seconds.
-
-### Step 4  -  Quality check
-- Every section has an audience label
-- No jargon in [Sales] or [CS] sections
-- [SC] sections are precise enough to answer a technical question
-- Feature names match terminology.md exactly
+1. Identify the audience. If mixed, label each section.
+2. Extract key messages: what it does, why it matters, common questions.
+3. Draft in the specified format.
+4. Quality check: audience labels present, no jargon in [Sales]/[CS] sections, feature names match terminology.md.
 
 ---
 
-## Outputs
+## Output
 
 Write to `enablement-decks/output/`.
 
-| Output type | File name format |
-|-------------|-----------------|
-| Training deck content | `deck-[topic]-[date].md` |
-| FAQ document | `faq-[topic]-[date].md` |
-| Quick-reference card | `qrc-[topic]-[date].md` |
+| Type | File name |
+|------|----------|
+| Deck | `deck-[topic]-[date].md` |
+| FAQ | `faq-[topic]-[date].md` |
+| Quick-reference | `qrc-[topic]-[date].md` |

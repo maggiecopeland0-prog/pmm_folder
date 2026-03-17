@@ -1,60 +1,42 @@
 # event-prep/CONTEXT.md
-*Layer 2  -  Stage contract. Read this after CLAUDE.md and CONTEXT.md.*
+*Layer 2 - Stage contract.*
 
 ---
 
 ## What This Workspace Does
 
-Produces event preparation materials: presenter briefs, talking points, speaker notes, and event agendas. Content supports internal presenters who need to deliver product-related sessions to external or internal audiences.
+Produces event preparation materials: presenter briefs, talking points, and Q&A prep for internal presenters.
 
 ---
 
 ## Inputs
 
 ### Always load from _config/
-- `voice.md`  -  tone and formatting
-- `audiences.md`  -  who the presenter is speaking to
+- `voice.md`
+- `audiences.md`
 
-### Layer 4  -  working inputs (provided per run)
-- Event details: name, date, audience, format (keynote, panel, demo, workshop)
+### Per run
+- Event details (name, date, audience, format, time limit)
 - Session topic or abstract
-- Presenter name and background (if available)
-- Time limit
+- Presenter name (if available)
 
 ---
 
 ## Process
 
-### Step 1  -  Understand the context
-Identify: Who is presenting? To whom? How long? What format? What's the one thing the audience should remember?
-
-### Step 2  -  Build the brief
-Structure:
-- **Session goal**  -  one sentence
-- **Audience profile**  -  who's in the room, what they care about
-- **Key messages**  -  3 max
-- **Talk track**  -  the narrative arc (opening hook → context → key points → close)
-- **Landmines**  -  topics to avoid or handle carefully
-
-### Step 3  -  Write supporting materials
-- **Talking points:** Numbered list, 1-2 sentences each, written in speakable language
-- **Speaker notes:** Tied to slides if applicable, include transitions between sections
-- **Q&A prep:** 5-8 anticipated questions with suggested answers
-
-### Step 4  -  Quality check
-- Talking points sound natural when read aloud (no written-language constructions)
-- Time estimate fits the slot
-- Key messages are consistent across all materials
-- No jargon the audience wouldn't know
+1. Identify who is presenting, to whom, for how long, and in what format.
+2. Build a brief: session goal (one sentence), key messages (3 max), talk track (opening > context > key points > close), and landmines to avoid.
+3. Write talking points in speakable language and anticipated Q&A.
+4. Quality check: points sound natural read aloud, time estimate fits the slot, no unfamiliar jargon.
 
 ---
 
-## Outputs
+## Output
 
 Write to `event-prep/output/`.
 
-| Output type | File name format |
-|-------------|-----------------|
-| Presenter brief | `brief-[event]-[date].md` |
+| Type | File name |
+|------|----------|
+| Brief | `brief-[event]-[date].md` |
 | Talking points | `talking-points-[event]-[date].md` |
 | Q&A prep | `qa-[event]-[date].md` |
