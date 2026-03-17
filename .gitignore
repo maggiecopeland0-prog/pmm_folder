@@ -1,0 +1,17 @@
+# OS files
+.DS_Store
+Thumbs.db
+
+# Editor files
+*.swp
+*.swo
+*~
+.vscode/
+.idea/
+
+# Session logs (contain per-session state)
+_session-log/
+
+# Output folders (generated content, not source)
+**/output/*
+!**/output/.gitkeep
