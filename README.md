@@ -28,36 +28,13 @@ Each layer loads progressively. The agent never loads everything at once - only 
 
 ## What's in This Repo
 
-| Path | What it is |
-|------|-----------|
-| `SKILL.md` | The skill itself (full ICM methodology) |
-| `README.md` | You are here |
-| `LICENSE` | MIT |
-| | |
-| **example/** | **Working PMM workspace (filled in)** |
-| `example/CLAUDE.md` | Identity and rules |
-| `example/CONTEXT.md` | Task routing table |
-| `example/_config/voice.md` | Tone, formatting, good/bad samples |
-| `example/_config/terminology.md` | Required/forbidden terms, product names |
-| `example/_config/audiences.md` | Audience profiles, mixed-audience rules |
-| `example/release-notes/` | Stage contract: Slack posts, product updates |
-| `example/enablement-decks/` | Stage contract: Training decks, FAQ docs |
-| `example/event-prep/` | Stage contract: Briefs, talking points |
-| | |
-| **template/** | **Blank starter (fork and fill in)** |
-| `template/CLAUDE.md` | Placeholders + guidance comments |
-| `template/CONTEXT.md` | Placeholders + guidance comments |
-| `template/_config/` | Voice, terminology, audiences templates |
-| `template/workspace-1/` | Generic stage contract template |
-| `template/workspace-2/` | Generic stage contract template |
-| `template/workspace-3/` | Generic stage contract template |
-| | |
-| **setup/** | **Onboarding** |
-| `setup/questionnaire.md` | 21-question interview guide |
-| | |
-| **docs/** | **Reference** |
-| `docs/design-principles.md` | The 5 design principles explained |
-| `docs/faq.md` | Common questions + troubleshooting |
+| Folder | What it is |
+|--------|-----------|
+| **example/** | A filled-in PMM workspace with 3 workspaces and 3 config files. Start here to see the pattern. |
+| **template/** | A blank starter with placeholders and guidance comments. Fork this to build your own. |
+| **setup/** | A 21-question interview guide that maps your answers to which template files to fill. |
+| **docs/** | Design principles and FAQ. |
+| `SKILL.md` | The full ICM methodology as a Claude skill. |
 
 ---
 
@@ -127,4 +104,4 @@ Protocol: [github.com/RinDig/Model-Workspace-Protocol-MWP-](https://github.com/R
 
 ## License
 
-MIT - see [LICENSE](LICENSE).
+Open source - see [LICENSE](LICENSE).

@@ -67,9 +67,7 @@ The result: Claude reads different files for different tasks, only loads what it
 | `_config/voice.md` | Template with example structure |
 | `_config/terminology.md` | Template with correction log |
 | `_config/audiences.md` | Template with profile format |
-| `workspace-1/CONTEXT.md` | Generic stage contract template |
-| `workspace-2/CONTEXT.md` | Generic stage contract template |
-| `workspace-3/CONTEXT.md` | Generic stage contract template |
+| `workspace-1/CONTEXT.md` | Generic stage contract template (duplicate for each workspace you need) |
 
 ---
 
@@ -93,13 +91,13 @@ The result: Claude reads different files for different tasks, only loads what it
 
 ---
 
-## 28 files across 4 sections
+## File count
 
 | Section | Files | Purpose |
 |---------|-------|---------|
 | Root | 4 | SKILL.md, README, LICENSE, .gitignore |
 | example/ | 9 | Fully populated PMM workspace |
-| template/ | 11 | Blank starter with placeholders |
+| template/ | 7 | Blank starter with placeholders |
 | setup/ + docs/ | 3 | Questionnaire + design principles + FAQ |
 
 ---
