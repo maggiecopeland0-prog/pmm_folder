@@ -1,12 +1,20 @@
-# Folder Training - ICM Workspace Builder
+# PMM Folder System - AI Agent Workspace Starter Kit
 
-A skill and starter kit for building AI agent workspaces using the **Interpretable Context Methodology (ICM)**, based on the [Model Workspace Protocol (MWP)](https://github.com/RinDig/Model-Workspace-Protocol-MWP-) by Van Clief & McDermott.
+A skill and starter kit for building AI agent workspaces for product marketing teams, built on the [Interpretable Context Methodology (ICM)](https://github.com/RinDig/Model-Workspace-Protocol-MWP-) and the [Model Workspace Protocol (MWP)](https://github.com/RinDig/Model-Workspace-Protocol-MWP-) by Van Clief & McDermott.
+
+---
+
+## Who Built This and Why
+
+I'm a Product Marketing Manager at Meltwater, where I lead product marketing for Mira AI, APIs & Governance, and Newsletters. I adopted ICM as the foundation for my own PMM workspace and quickly realized the pattern could work for any team that produces recurring deliverables with AI.
+
+I use this system daily with Claude for sales enablement, release notes, event prep, and executive briefings. This repo packages what I learned into a starter kit so other teams - especially non-technical ones - can build their own version without writing any code.
 
 ---
 
 ## What This Is
 
-ICM is a way to organize folders and markdown files so that an AI agent (Claude, or any LLM) gets the right context at the right time for your team's recurring work. No code, no framework - just a well-structured folder with plain text files that any human can read, edit, and version-control.
+This starter kit uses ICM's five-layer architecture to organize folders and markdown files so AI agents receive the right context at the right time for your team's recurring work. No code, no framework - just a well-structured folder with plain text files that any human can read, edit, and version-control.
 
 The core idea: if the prompts and context for each type of work live in a well-organized folder hierarchy, you don't need a coordination framework. You need one agent that reads the right files at the right moment.
 
@@ -34,7 +42,7 @@ Each layer loads progressively. The agent never loads everything at once - only 
 | **template/** | A blank starter with placeholders and guidance comments. Fork this to build your own. |
 | **setup/** | A 21-question interview guide that maps your answers to which template files to fill. |
 | **docs/** | Design principles and FAQ. |
-| `SKILL.md` | The full ICM methodology as a Claude skill. |
+| `SKILL.md` | Claude skill for building workspaces using this system. |
 
 ---
 
@@ -52,7 +60,7 @@ Each layer loads progressively. The agent never loads everything at once - only 
 ### Option B: Use the skill with Claude
 
 1. Install `SKILL.md` as a Claude skill (Claude Code or Cowork).
-2. Tell Claude: "Set up an ICM workspace for my team."
+2. Tell Claude: "Set up a workspace for my team."
 3. Claude will interview you, build the folder structure, and populate the files.
 
 ---
@@ -71,7 +79,7 @@ I came to this method with a specific perspective: I spent the last year bringin
 
 When I turned around and started using AI for my own work, I wanted those same things. As a Product Marketer, not a developer, I don't write code. I can't debug a script or trace a function call. So if Claude is making decisions about what context to load and how to structure my content, I need to be able to see those decisions and change them.
 
-That's what ICM actually gives you. Every instruction Claude follows is a markdown file you can open and read. The routing table that tells Claude which files to load for a release note versus a deck? That's a table in CONTEXT.md - you can edit it in any text editor. The process Claude follows to write a release note? That's a numbered list in release-notes/CONTEXT.md. If the output isn't right, you don't guess at what went wrong. You open the file, find the step, and fix it.
+That's what this system actually gives you. Every instruction Claude follows is a markdown file you can open and read. The routing table that tells Claude which files to load for a release note versus a deck? That's a table in CONTEXT.md - you can edit it in any text editor. The process Claude follows to write a release note? That's a numbered list in release-notes/CONTEXT.md. If the output isn't right, you don't guess at what went wrong. You open the file, find the step, and fix it.
 
 There's no hidden logic. No black box between what you told Claude and what it produces. If you change a line in voice.md, you know exactly what that change will affect and when it will load. If you add a term to the correction log in terminology.md, it applies to every future task that loads that file. You're editing the system in plain language, and the system does what the files say.
 
@@ -94,7 +102,7 @@ Originally built for Product Marketing at Meltwater. Designed to work for any te
 
 ## Credits
 
-Based on the Interpretable Context Methodology (ICM), implementing the Model Workspace Protocol (MWP):
+This project implements the [Interpretable Context Methodology (ICM)](https://github.com/RinDig/Model-Workspace-Protocol-MWP-), based on the Model Workspace Protocol (MWP) by Van Clief & McDermott. ICM provides the five-layer architecture and design principles; this repo adapts them into a starter kit for product marketing and other non-technical teams.
 
 > Van Clief, J. & McDermott, D. (2026). "Interpretable Context Methodology: Folder Structure as Agent Architecture." Eduba, University of Edinburgh.
 
