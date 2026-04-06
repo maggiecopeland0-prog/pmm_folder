@@ -1,7 +1,7 @@
 ---
 name: folder-training
 description: >
-  Teaches Claude how to build and navigate team workspaces using the Interpretable Context Methodology (ICM),
+  Teaches Claude how to build and navigate team workspaces using a folder system built on the Interpretable Context Methodology (ICM),
   a five-layer system of markdown files and folders that structures context delivery for AI agents.
   Based on the Model Workspace Protocol (MWP) by Van Clief & McDermott. Use this skill whenever someone asks
   to "set up a workspace," "train Claude on my folder," "create a CLAUDE.md," "build an ICM workspace,"
@@ -11,9 +11,9 @@ description: >
   even if they don't use the term ICM or MWP.
 ---
 
-# Folder Training  -  Interpretable Context Methodology (ICM)
+# Folder Training  -  PMM Workspace Builder (built on ICM)
 
-This skill teaches you how to build structured workspaces that give Claude (or any AI agent) deep, role-aware context for a team's recurring work. The method is based on the Model Workspace Protocol (MWP), which replaces framework-level orchestration with filesystem structure. Plain markdown files carry the prompts and context. The folder hierarchy tells the agent what to do at each step. No code, no framework, no deployment step.
+This skill teaches you how to build structured workspaces that give Claude (or any AI agent) deep, role-aware context for a team's recurring work. The method is built on the Interpretable Context Methodology (ICM) and the Model Workspace Protocol (MWP), which replaces framework-level orchestration with filesystem structure. Plain markdown files carry the prompts and context. The folder hierarchy tells the agent what to do at each step. No code, no framework, no deployment step.
 
 The core insight: if the prompts and context for each stage of a workflow already exist as files in a well-organized folder hierarchy, you do not need a coordination framework. You need one agent that reads the right files at the right moment.
 
