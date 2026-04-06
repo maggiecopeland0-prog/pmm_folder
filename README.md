@@ -38,11 +38,11 @@ Each layer loads progressively. The agent never loads everything at once - only 
 
 | Folder | What it is |
 |--------|-----------|
-| **example/** | A filled-in PMM workspace with 3 workspaces and 3 config files. Start here to see the pattern. |
-| **template/** | A blank starter with placeholders and guidance comments. Fork this to build your own. |
-| **setup/** | A 21-question interview guide that maps your answers to which template files to fill. |
-| **docs/** | Design principles and FAQ. |
-| `SKILL.md` | Claude skill for building workspaces using this system. |
+| **[example/](https://github.com/maggiecopeland0-prog/pmm_folder/tree/main/example)** | A filled-in PMM workspace with 3 workspaces and 3 config files. Start here to see the pattern. |
+| **[template/](https://github.com/maggiecopeland0-prog/pmm_folder/tree/main/template)** | A blank starter with placeholders and guidance comments. Fork this to build your own. |
+| **[setup/](https://github.com/maggiecopeland0-prog/pmm_folder/tree/main/setup)** | A 21-question interview guide that maps your answers to which template files to fill. |
+| **[docs/](https://github.com/maggiecopeland0-prog/pmm_folder/tree/main/docs)** | Design principles and FAQ. |
+| [`SKILL.md`](https://github.com/maggiecopeland0-prog/pmm_folder/blob/main/SKILL.md) | Claude skill for building workspaces using this system. |
 
 ---
 
@@ -51,7 +51,7 @@ Each layer loads progressively. The agent never loads everything at once - only 
 ### Option A: Use the template
 
 1. Copy `template/` to your working directory and rename it.
-2. Open `setup/questionnaire.md` and work through the interview questions with Claude or on your own.
+2. Open [`setup/questionnaire.md`](https://github.com/maggiecopeland0-prog/pmm_folder/blob/main/setup/questionnaire.md) and work through the interview questions with Claude or on your own.
 3. Fill in the placeholder files based on your answers.
 4. Run a real task through the workspace and iterate.
 
@@ -59,7 +59,7 @@ Each layer loads progressively. The agent never loads everything at once - only 
 
 ### Option B: Use the skill with Claude
 
-1. Install `SKILL.md` as a Claude skill (Claude Code or Cowork).
+1. Install [`SKILL.md`](https://github.com/maggiecopeland0-prog/pmm_folder/blob/main/SKILL.md) as a Claude skill (Claude Code or Cowork).
 2. Tell Claude: "Set up a workspace for my team."
 3. Claude will interview you, build the folder structure, and populate the files.
 
@@ -77,19 +77,19 @@ Each layer loads progressively. The agent never loads everything at once - only 
 
 I came to this method with a specific perspective: I spent the last year bringing an AI-powered product to market. I've sat in the rooms where we talked about what users need from AI - and the answer always came back to the same things. People need to see what's happening. They need to know they can step in. They need confidence that the system is doing what they told it to, not something else.
 
-When I turned around and started using AI for my own work, I wanted those same things. As a Product Marketer, not a developer, I don't write code. So if Claude is making decisions about what context to load and how to structure my content, I need to be able to see those decisions and change them.
+When I turned around and started using AI for my own work, I wanted those same things. As a Product Marketer, not a developer, I don't write code. I can't debug a script or trace a function call. So if Claude is making decisions about what context to load and how to structure my content, I need to be able to see those decisions and change them.
 
-Every instruction Claude follows is a markdown file you can open and read. The routing table that tells Claude which files to load for a release note versus a deck? That's a table in CONTEXT.md - you can edit it in any text editor. The process Claude follows to write a release note? That's a numbered list in release-notes/CONTEXT.md. If the output isn't right, you don't guess at what went wrong. You open the file, find the step, and fix it. 
+That's what this system actually gives you. Every instruction Claude follows is a markdown file you can open and read. The routing table that tells Claude which files to load for a release note versus a deck? That's a table in CONTEXT.md - you can edit it in any text editor. The process Claude follows to write a release note? That's a numbered list in release-notes/CONTEXT.md. If the output isn't right, you don't guess at what went wrong. You open the file, find the step, and fix it.
 
 You can see exactly how your instructions connect to what Claude produces. If something's off in the output, you can trace it back to what you wrote — and fix it. If you change a line in voice.md, you know exactly what that change will affect and when it will load. If you add a term to the correction log in terminology.md, it applies to every future task that loads that file. You're editing the system in plain language, and the system does what the files say.
 
-This matters especially for no-code workflows. I don't need to understand prompt engineering theory or token optimization. I need to know that when I write "always say X, never Y" in a config file, Claude will follow that rule - and that I can verify it did by reading the file it loaded. The workspace is the documentation. The documentation is the workspace. Nothing is hidden.
+This matters especially for no-code workflows. I don't need to understand prompt engineering theory or token optimization. I need to know that when I write "always say customer, never client" in a config file, Claude will follow that rule - and that I can verify it did by reading the file it loaded. The workspace is the documentation. The documentation is the workspace. Nothing is hidden.
 
 ---
 
 ## Why Product Marketers Are Set Up for This
 
-Product marketers are uniquely positioned for this kind of work. We already think in frameworks: messaging guides, competitive battlecards, audience profiles, talk tracks. That kind of structured, opinionated documentation is exactly what trains an AI well. The deliverables we produce every day are already organized, consistent, and built around repeatable patterns.
+Product marketers are uniquely positioned for this kind of work. We already think in frameworks — messaging guides, competitive battlecards, audience profiles, talk tracks. That kind of structured, opinionated documentation is exactly what trains an AI well. The deliverables we produce every day are already organized, consistent, and built around repeatable patterns.
 
 If you already build deliverables from templates and reference docs, you're closer to a working AI workspace than you might think. You don't need to learn prompt engineering. You need to organize what you already know.
 
