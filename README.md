@@ -332,7 +332,6 @@ Any team with recurring AI-assisted workflows where:
 Originally built for Product Marketing at Meltwater. Designed to work for any team.
 
 ---
-
 ## FAQ
 
 <details>
@@ -404,7 +403,6 @@ Edit the markdown files directly. If outputs consistently have the same problem,
 Yes. The workspace is a folder. Share it via Git, cloud storage, or a zip file. Each person can run it independently. If someone improves a config file, commit it so everyone benefits.
 
 </details>
-
 ---
 
 ## Resources
