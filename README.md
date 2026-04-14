@@ -333,9 +333,23 @@ Originally built for Product Marketing at Meltwater. Designed to work for any te
 
 ---
 
-## Troubleshooting
+## FAQ
 
-### 1. "Claude isn't reading my files."
+<details>
+<summary><strong>1. "Where do I actually use this — Claude Code, Cowork, or claude.ai?"</strong></summary>
+
+Any of them. The folder system works anywhere Claude can read local files.
+
+- **Cowork** (desktop app, Windows/Mac): Load your workspace folder. `CLAUDE.md` loads automatically every session. Best for non-developers.
+- **Claude Code** (CLI): Point it at your workspace directory. Claude reads `CLAUDE.md` first. Best if you already work in a terminal.
+- **claude.ai Projects** (web): Upload your key files (`CLAUDE.md`, `CONTEXT.md`, and `_config/` files) into a Project. Works for smaller workspaces; less practical for large ones since files don't sync automatically.
+
+If you're not sure: start with Cowork. No setup beyond opening a folder.
+
+</details>
+
+<details>
+<summary><strong>2. "Claude isn't reading my files."</strong></summary>
 
 Check these in order:
 
@@ -343,7 +357,10 @@ Check these in order:
 2. **Did you keep the exact file names?** The naming convention (`CLAUDE.md`, `CONTEXT.md`, `_config/`) matters. Renaming files will break the routing.
 3. **Are you pointing Claude to the right folder?** Make sure your workspace folder is set as Claude's working directory or project folder.
 
-### 2. "My output is still generic."
+</details>
+
+<details>
+<summary><strong>3. "My output is still generic."</strong></summary>
 
 This usually means one of three things:
 
@@ -351,25 +368,42 @@ This usually means one of three things:
 2. **Your stage contract is too vague.** "Write a good release note" is too generic. "Write a Slack-format announcement under 150 words that leads with customer value" is specific enough to work.
 3. **Your config files aren't being loaded.** Check your routing table in CONTEXT.md. Make sure the task type is listed and the right config files are specified.
 
-### 3. "Do I need to fill in everything on day one?"
+</details>
+
+<details>
+<summary><strong>4. "Do I need to fill in everything on day one?"</strong></summary>
 
 No. Start with three files: CLAUDE.md, CONTEXT.md, and one workspace folder's CONTEXT.md. Add config files and additional workspace folders as you go. A minimal workspace that you actually use beats a complete one that you never finish setting up.
 
-### 4. "How many workspace folders should I have?"
+</details>
+
+<details>
+<summary><strong>5. "How many workspace folders should I have?"</strong></summary>
 
 Aim for 4-12. Fewer than 4 means the structure probably isn't adding value. More than 12 means you might be over-segmenting. The test: if two workspaces share the same process AND the same config files, merge them.
 
-### 5. "What if I want to use this with a different AI model?"
+</details>
+
+<details>
+<summary><strong>6. "What if I want to use this with a different AI model?"</strong></summary>
 
 The folder system is model-agnostic. The folder structure, file formats, and naming conventions don't depend on any model-specific capability. Point a different model at the same files and it works. The protocol imposes no vendor lock-in.
 
-### 6. "How do I update the workspace over time?"
+</details>
+
+<details>
+<summary><strong>7. "How do I update the workspace over time?"</strong></summary>
 
 Edit the markdown files directly. If outputs consistently have the same problem, trace it to the source: update the voice guide, add a correction to `terminology.md`, or refine the process in a workspace CONTEXT.md. This is the Edit-Source Principle: fix the factory, not the product.
 
-### 7. "Can multiple people use the same workspace?"
+</details>
+
+<details>
+<summary><strong>8. "Can multiple people use the same workspace?"</strong></summary>
 
 Yes. The workspace is a folder. Share it via Git, cloud storage, or a zip file. Each person can run it independently. If someone improves a config file, commit it so everyone benefits.
+
+</details>
 
 ---
 
