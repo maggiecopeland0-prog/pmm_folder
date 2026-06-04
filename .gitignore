@@ -11,6 +11,9 @@ Thumbs.db
 
 # Session logs (contain per-session state)
 _session-log/
+# ...but keep the example's folder visible so the map matches the repo
+!example/_session-log/
+!example/_session-log/.gitkeep
 
 # Output folders (generated content, not source)
 **/output/*
