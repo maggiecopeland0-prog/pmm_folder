@@ -23,16 +23,20 @@ pmm-workspace/
 │   ├── terminology.md
 │   └── audiences.md
 │
-├── release-notes/             ← workspace (Layer 2)
+├── _session-log/              ← memory layer (cross-session state)
+│
+├── release-notes/             ← workspace (Layer 2)  -  active
 │   ├── CONTEXT.md
 │   └── output/
-├── enablement-decks/          ← workspace (Layer 2)
+├── enablement-decks/          ← workspace (Layer 2)  -  active
 │   ├── CONTEXT.md
 │   └── output/
-└── event-prep/                ← workspace (Layer 2)
+└── event-prep/                ← workspace (Layer 2)  -  active
     ├── CONTEXT.md
     └── output/
 ```
+
+Workspace folders carry a status (`active` / `dormant` / `archived`). Dormant and archived workspaces stay in place but are left out of the routing table, so they never add to what gets loaded for live work. See [docs/operating-a-workspace.md](../docs/operating-a-workspace.md).
 
 ---
 
@@ -45,6 +49,10 @@ pmm-workspace/
 5. Do the work. Write output to the workspace's output/ folder.
 
 **Never load all _config/ files at once.** Each workspace specifies exactly which reference files it needs.
+
+### Resuming previous work
+
+If I reference earlier work or a previous session ("let's continue X," "pick up where we left off," "the draft we built"), check `_session-log/` first for the most recent entry on that topic, read it fully, then proceed. Those notes hold decisions, open questions, and corrections that won't otherwise survive between sessions.
 
 ---
 
