@@ -1,8 +1,5 @@
 # PMM Folder System: Setup & Walkthrough Guide
 
-**Internal Reference.**
-Product Marketing | April 2026
-
 ---
 
 ## What is this guide?
@@ -11,7 +8,7 @@ A step-by-step guide for setting up an AI workspace so Claude produces consisten
 
 No code required. Everything here is plain text files in folders.
 
-Personal note: I built this system as a Product Marketing Manager with zero technical background. If I can set this up, you can, too. 🐥
+Personal note: I built this system as a Product Marketing Manager with zero technical background. If I can set this up, you can, too.
 
 ---
 
@@ -48,9 +45,13 @@ Personal note: I built this system as a Product Marketing Manager with zero tech
 
 ## Who Built This and Why
 
-I'm a Product Marketing Manager at Meltwater, where I lead product marketing for Mira AI, APIs & Governance. My work spans sales enablement, release notes, event prep, and executive briefing content, all for different audiences (Sales, CS, Solutions Consultants) who each need different tone, depth, and framing.
+I'm a Product Marketing Manager at Meltwater, where I lead product marketing for AI, including Meltwater MCP, Mira AI, APIs, and Governance. My work spans sales enablement, launch communications and release notes, pricing and packaging enablement, internal FAQ programs, customer onboarding guides, and executive briefings. The audiences range from our internal Sales organization, including Customer Success and Solutions Consultants, to customers themselves, and each needs different tone, depth, and framing.
 
-I use this system daily with Claude for sales enablement, release notes, event prep, and executive briefings. Before building it, I hit three problems fast: the output was generic, I was repeating myself every session, and I couldn't scale across deliverable types without losing consistency.
+I built this system earlier this year and have used it daily since. The first problems showed up fast: the output was generic, I was repeating myself every session, and I couldn't scale across deliverable types without losing consistency. The deeper problems showed up with use: work that spanned multiple sessions kept losing its thread, everything I taught the AI was trapped in one person's chat history where no teammate could benefit from it, there was no way to trace *why* an output came out wrong, and quality is the first thing to collapse under launch pressure when there's no time to edit heavily. The folder system answers each of those with the same move: put the knowledge in a file.
+
+Since then, the system has carried me through a full product launch. I took Meltwater MCP from first positioning to general availability with this exact structure: the enablement decks, pricing documentation, FAQ program, connection guides, and release communications all came out of the same folder system, produced fast enough to keep pace with a GA week. The operational patterns in [docs/operating-a-workspace.md](https://github.com/maggiecopeland0-prog/pmm_folder/blob/main/docs/operating-a-workspace.md) (the memory layer, workspace lifecycle, archive sweeps, processes graduating into skills) all come from that stretch of real use, not from theory. My own workspace now runs more than fifteen active and dormant workspaces plus an archive layer, so the pattern holds well past the three-workspace example in this repo.
+
+It also changed what I'm able to do. I came to this with zero technical background, and working this way has made previously inaccessible work accessible: I'm now confident testing APIs and building custom agents, and I'm digging into knowledge graphs, retrieval-augmented generation (RAG), and how to evaluate an AI harness, because I want to be a genuine expert in the product I market. That knowledge came naturally through the work itself, and it has stayed with me: I can now take on things I previously didn't know how to approach.
 
 This starter kit packages what I learned so other teams can do the same.
 
@@ -179,7 +180,7 @@ Managers (CSMs), and Solutions Consultants (SCs).
 
 - Always say **customer**, never "client"
 - Always say **overview**, never "summary" when describing AI outputs
-- Use audience labels [Sales] [CS] [SC] [All] when content varies by role
+- Lead with customer value, not product mechanics
 - Avoid em dashes
 ```
 
@@ -236,7 +237,7 @@ Pick the deliverable type you produce most often. Rename the `workspace-1/` fold
 5. Lead with customer value, not product mechanics
 
 ## Output Format
-Slack post (markdown). No attachments. Includes [All] audience label.
+Slack post (markdown). No attachments.
 
 ## Quality Checks
 - Uses "customer" (not "client")
@@ -417,8 +418,6 @@ Yes. The workspace is a folder. Share it via Git, cloud storage, or a zip file. 
 
 - [Interpretable Context Methodology (ICM)](https://github.com/RinDig/Model-Workspace-Protocol-MWP-) — Van Clief & McDermott (2026), Eduba, University of Edinburgh
 - [Model Workspace Protocol (MWP)](https://github.com/RinDig/Model-Workspace-Protocol-MWP-) — Open-source protocol (MIT License)
-
-Questions or feedback? Reach out to PMM.
 
 ---
 

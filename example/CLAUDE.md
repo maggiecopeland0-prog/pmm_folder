@@ -60,7 +60,6 @@ If I reference earlier work or a previous session ("let's continue X," "pick up 
 
 - Always say **customer**, never "client"
 - Always say **overview**, never "summary" when describing AI-generated outputs
-- Use audience labels [Sales] [CS] [SC] [All] when content varies by role
 - Lead with customer value, not product mechanics
 - Avoid em dashes  -  restructure the sentence instead
 

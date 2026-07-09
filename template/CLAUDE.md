@@ -65,7 +65,7 @@ I work across these audiences: [LIST YOUR AUDIENCES].
 
 - [RULE 1: e.g., Always say "customer," never "client"]
 - [RULE 2: e.g., Always use [Product Name] exactly  -  no abbreviations]
-- [RULE 3: e.g., Label content by audience: [Sales] [CS] [SC] [All]]
+- [RULE 3: e.g., Never describe the product as "proactive"  -  it requires user input]
 - [RULE 4: e.g., Lead with customer value, not product mechanics]
 
 ---

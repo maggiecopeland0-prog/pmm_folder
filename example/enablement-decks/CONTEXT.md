@@ -25,10 +25,10 @@ Produces sales enablement materials: training decks, FAQ docs, and quick-referen
 
 ## Process
 
-1. Identify the audience. If mixed, label each section.
+1. Identify the audience. If mixed, order sections so each reader can stop once they have what they need.
 2. Extract key messages: what it does, why it matters, common questions.
 3. Draft in the specified format.
-4. Quality check: audience labels present, no jargon in [Sales]/[CS] sections, feature names match terminology.md.
+4. Quality check: shared content first and technical detail last, no jargon in Sales/CS sections, feature names match terminology.md.
 
 ---
 

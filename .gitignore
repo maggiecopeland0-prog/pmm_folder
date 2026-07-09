@@ -9,6 +9,9 @@ Thumbs.db
 .vscode/
 .idea/
 
+# Local working materials (internal Meltwater files; never publish)
+_local/
+
 # Session logs (contain per-session state)
 _session-log/
 # ...but keep the example's folder visible so the map matches the repo

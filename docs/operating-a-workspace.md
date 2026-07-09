@@ -37,6 +37,24 @@ Session logs accumulate fast, and it's easy to end up with several overlapping n
 
 **In practice:** treat the session log as the workspace's working memory. The discipline is to write a short note at the end of any session whose state matters, and to read the latest note at the start of any session that resumes prior work.
 
+### Two kinds of memory
+
+Session logs are not the only memory in play. Claude (in Claude Code and Cowork) also keeps its own persistent memory: small fact files it writes and recalls automatically across sessions. It's easy to conflate the two, but they live in different places and behave differently.
+
+| | Session log (`_session-log/`) | Assistant memory |
+|---|---|---|
+| Who writes it | You or the agent, deliberately, at the end of a session | The assistant, automatically, as it learns things about you |
+| Where it lives | Inside the workspace folder | Outside the workspace, in the assistant's own data directory, keyed to the folder's path |
+| What it holds | Project state: decisions, open questions, artifact status | Durable facts: preferences, corrections, standing context |
+| Travels with the folder? | Yes. Zip it, share it, clone it, and the logs come along | No. It's tied to the machine, the account, and the folder path |
+
+Two practical consequences:
+
+1. **Portability.** If you copy your workspace to a new machine or a second account, the session logs arrive but the assistant's memory doesn't. The new setup will feel like it forgot you. It didn't lose your files; it lost its own notes about you.
+2. **Where durable rules belong.** If a fact should survive sharing the workspace with a teammate, it belongs in a `_config/` file, not only in assistant memory. Config files are the portable, inspectable version of the same knowledge. Let assistant memory hold the incidental stuff; let `_config/` hold the rules.
+
+One trap to avoid: creating a `memory/` folder inside the workspace and expecting the assistant to use it. It won't. The assistant's memory location isn't configurable from your folder structure; the workspace-side memory you control is the session log.
+
 ---
 
 ## Workspace Lifecycle
@@ -59,6 +77,19 @@ Two rules of thumb:
 - **Archive, don't delete.** A finished workspace is a record of how that work was done. Keeping it costs nothing as long as it's clearly marked and kept out of active routing.
 
 **In practice:** when a workspace stops being used, change its status rather than leaving it to look active or deleting it outright. Dormant and archived workspaces should not appear in the active routing table, so they never add to what the agent loads for live work.
+
+### Give archived work a physical home: `_archive/`
+
+Statuses in the map help, but archived work is easier to live with when it also moves. A top-level `_archive/` folder gives the "archived" status a destination. Two kinds of things go there:
+
+- **Finished workspaces.** When a project wraps, move the whole folder into `_archive/` and remove it from the routing table. It stays greppable and recoverable without looking like live work.
+- **Stale loose files.** Files accumulate at the workspace root: one-off analyses, superseded drafts, exports someone sent you. Sweep anything old into `_archive/root-files/` (or similar) so the root stays readable.
+
+Do the sweep periodically rather than continuously; every month or two is enough. The underscore prefix keeps `_archive/` sorted with the other structural folders and visually separate from active workspaces. Never route new work to it, and check it before concluding a file is lost.
+
+### Rendered previews: `_preview/`
+
+If your review flow involves generating formatted previews of drafts (an HTML redline of a doc edit, a rendered look at slide copy), give them a home in a top-level `_preview/` folder instead of scattering preview files next to the deliverables they mirror. Everything in it is generated, so it's safe to clear at any time and safe to exclude from version control. The deliverable folders stay clean, and there's never confusion about which file is the source and which is the rendering.
 
 ---
 
@@ -83,6 +114,21 @@ If both check out, a large workspace is working as intended.
 
 ---
 
+## When a Process Graduates into a Skill
+
+A workspace's CONTEXT.md is a process the agent reads and follows. Some processes mature past that: you've run them enough times that the steps are settled, they always load the same files, and you find yourself typing the same trigger phrase to kick them off. That's the point where a process can graduate into a **skill**: the stage contract packaged as an instruction set the assistant invokes by name (Claude supports these directly in Claude Code and Cowork).
+
+The division of labor after graduating:
+
+- **The skill carries the process.** The steps, the files to load, the output format, the quality checks.
+- **The workspace folder stays as the content home.** Inputs, outputs, findings, and session logs still live there. The skill points at the folder; it doesn't replace it.
+
+Signals a process is ready to graduate: you've run it several times without editing the steps, the trigger is a recognizable phrase ("run the monthly review", "draft the release post"), and the value is in never re-explaining the setup.
+
+Two cautions. First, keep the folder version of the process up to date even after the skill exists; the skill is assistant-specific, while the markdown folder remains the portable, model-agnostic source of truth. Second, don't graduate too early. A process you're still revising every run belongs in a CONTEXT.md where editing it is frictionless.
+
+---
+
 ## Where This Shows Up: The Workspace Map
 
 Both patterns live in one place the agent always reads: the workspace map in `CLAUDE.md`. The memory layer gets a line of its own alongside `_config/`, and each workspace folder carries its status inline.
@@ -98,15 +144,18 @@ team-workspace/
 │   └── audiences.md
 │
 ├── _session-log/              ← memory layer (cross-session state)
+├── _preview/                  ← rendered draft previews (generated; safe to clear)
 │
 ├── release-notes/             ← active
 ├── enablement-decks/          ← active
 ├── event-prep/                ← active
 ├── reports/                   ← dormant (seasonal; quiet until quarter-end)
-└── product-launch-q1/         ← archived (completed; reference only)
+│
+└── _archive/                  ← finished work; never routed to
+    └── product-launch-q1/     ← archived (completed; reference only)
 ```
 
-Reading top to bottom, the map now answers three questions at a glance: where cross-session memory lives, which workspaces are in active use, and which are kept only for reference. None of that requires opening another file.
+Reading top to bottom, the map now answers four questions at a glance: where cross-session memory lives, where generated previews go, which workspaces are in active use, and which are kept only for reference. None of that requires opening another file.
 
 ---
 
