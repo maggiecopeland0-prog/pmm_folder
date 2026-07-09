@@ -90,17 +90,11 @@ Without this system, every Claude session starts from zero. You paste your voice
 
 Real numbers from my own workspace: since mid-March, Claude has processed about 2.3 billion tokens across roughly 18,000 assistant turns of my work, and 93.5% of that volume was served from the prompt cache. Stable, layered files are what make that possible: because the same CLAUDE.md and config files open every session, most of the context is reusable instead of re-sent.
 
-```mermaid
-xychart-beta
-    title "Tokens processed per month, millions"
-    x-axis ["Mar (from Mar 13)", "Apr", "May", "Jun", "Jul (to Jul 9)"]
-    y-axis "Millions of tokens" 0 --> 1100
-    bar [272, 343, 356, 1065, 243]
-```
+[![View the interactive token chart](https://img.shields.io/badge/%E2%96%B8%20View%20the%20interactive%20token%20chart-2a78d6?style=for-the-badge)](https://maggiecopeland0-prog.github.io/pmm_folder/token-savings.html)
+
+Hover a month (or click a bar) and the chart previews the tokens that could have been wasted without caching. The source lives in [docs/token-savings.html](docs/token-savings.html).
 
 A note on the data: this is a sample from the local session logs on one machine, not a complete audit of every conversation. I started in Cowork and later added Claude Code, each tool keeps its own local logs, and these numbers combine both. June's spike is what a product launch month looks like.
-
-Prefer it interactive? [The live version of this chart](https://maggiecopeland0-prog.github.io/pmm_folder/token-savings.html) shows the same data with hover detail: point at a month (or click a bar) and it previews the tokens that could have been wasted without caching. The source is [docs/token-savings.html](docs/token-savings.html).
 
 ---
 
