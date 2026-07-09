@@ -100,6 +100,8 @@ xychart-beta
 
 A note on the data: this is a sample from the local session logs on one machine, not a complete audit of every conversation. I started in Cowork and later added Claude Code, each tool keeps its own local logs, and these numbers combine both. June's spike is what a product launch month looks like.
 
+Prefer it interactive? [docs/token-savings.html](docs/token-savings.html) shows the same data with hover detail: point at a month and it previews the tokens that could have been wasted without caching. Download the file and open it in your browser.
+
 ---
 
 ## The Five-Layer Architecture

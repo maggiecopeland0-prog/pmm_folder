@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Token Savings from a Layered Workspace</title>
+<style>
+:root{--bg:#fcfcfb;--ink:#0b0b0b;--ink2:#52514e;--muted:#898781;--line:#e1e0d9;--border:rgba(11,11,11,.12);--s-proc:#2a78d6;--tipbg:#ffffff}
+@media (prefers-color-scheme: dark){:root{--bg:#1a1a19;--ink:#ffffff;--ink2:#c3c2b7;--muted:#898781;--line:#2c2c2a;--border:rgba(255,255,255,.14);--s-proc:#3987e5;--tipbg:#242423}}
+body{margin:0;background:var(--bg);color:var(--ink);font-family:system-ui,-apple-system,"Segoe UI",sans-serif;line-height:1.5}
+.wrap{max-width:760px;margin:0 auto;padding:40px 24px 64px;position:relative}
+h1{font-size:24px;margin:0 0 6px}
+.lede{font-size:14px;color:var(--ink2);margin:0 0 24px;max-width:60ch}
+.tiles{display:flex;gap:10px;flex-wrap:wrap;margin-bottom:24px}
+.tile{flex:1 1 150px;border:1px solid var(--border);border-radius:8px;padding:12px 14px}
+.tile b{display:block;font-size:24px;font-weight:600}
+.tile span{font-size:11px;color:var(--ink2)}
+h2{font-size:15px;margin:8px 0 2px}
+.sub{font-size:12px;color:var(--muted);margin:0 0 6px}
+svg{width:100%;height:auto;display:block}
+.tip{position:absolute;pointer-events:none;background:var(--tipbg);border:1px solid var(--border);border-radius:6px;padding:8px 11px;font-size:12px;line-height:1.55;display:none;z-index:5;box-shadow:0 2px 10px rgba(0,0,0,.12);white-space:nowrap}
+.tip b{font-size:13px}
+table{border-collapse:collapse;margin-top:28px;font-size:12.5px;font-variant-numeric:tabular-nums;width:100%}
+td,th{padding:6px 10px;text-align:right;border-bottom:1px solid var(--line)}
+th:first-child,td:first-child{text-align:left}
+caption{text-align:left;font-size:13px;font-weight:600;padding-bottom:6px}
+.note{font-size:12px;color:var(--muted);margin-top:20px}
+a{color:var(--s-proc)}
+</style>
+</head>
+<body>
+<div class="wrap">
+<h1>Token Savings from a Layered Workspace</h1>
+<p class="lede">Real numbers from the workspace behind the <a href="https://github.com/maggiecopeland0-prog/pmm_folder">PMM Folder System</a>. Because the layered files stay stable between requests, most context is served from the prompt cache instead of being re-sent fresh. Hover a month to preview the tokens that could have been wasted.</p>
+<div class="tiles">
+  <div class="tile"><b>2.14B</b><span>could-have-been-wasted tokens avoided</span></div>
+  <div class="tile"><b>94.1%</b><span>of context served from cache</span></div>
+  <div class="tile"><b>134.7M</b><span>actually sent fresh</span></div>
+</div>
+<h2>Context processed per month, millions of tokens</h2>
+<p class="sub">Hover a month to preview the tokens that could have been wasted without caching</p>
+<svg id="chart" viewBox="0 0 700 240" role="img" aria-label="Monthly bars; hover splits each into cached versus fresh"></svg>
+<div class="tip" id="tip"></div>
+<table>
+<caption>The same data as a table</caption>
+<tr><th>Month</th><th>Total context (M)</th><th>Served from cache (M)</th><th>Sent fresh (M)</th><th>Cache share</th></tr>
+<tr><td>March 2026 (from Mar 13)</td><td>272.1</td><td>243.6</td><td>28.5</td><td>89.5%</td></tr>
+<tr><td>April 2026</td><td>342.9</td><td>305.7</td><td>37.3</td><td>89.1%</td></tr>
+<tr><td>May 2026</td><td>356.3</td><td>338.3</td><td>18.0</td><td>94.9%</td></tr>
+<tr><td>June 2026</td><td>1,064.9</td><td>1,027.3</td><td>37.5</td><td>96.5%</td></tr>
+<tr><td>July 2026 (to Jul 9)</td><td>243.2</td><td>229.9</td><td>13.3</td><td>94.5%</td></tr>
+</table>
+<p class="note">A note on the data: this is a sample from local session logs on one machine, combining Cowork and Claude Code stores, not a complete audit of every conversation. Counts come from per-message usage records in the session transcripts. June's spike is what a product launch month looks like.</p>
+</div>
+<script>
+(function(){
+const DATA=[
+ {m:"Mar",full:"March 2026 (from Mar 13)",fresh:28537616,cached:243566409},
+ {m:"Apr",full:"April 2026",fresh:37257642,cached:305691008},
+ {m:"May",full:"May 2026",fresh:18013093,cached:338292879},
+ {m:"Jun",full:"June 2026",fresh:37540067,cached:1027313944},
+ {m:"Jul",full:"July 2026 (to Jul 9)",fresh:13322017,cached:229882404}];
+const NS="http://www.w3.org/2000/svg",svg=document.getElementById('chart'),wrap=document.querySelector('.wrap'),tip=document.getElementById('tip');
+const padL=46,base=205,top=30,yMax=1100e6,W=700;
+const el=(p,t,a)=>{const e=document.createElementNS(NS,t);for(const k in a)e.setAttribute(k,a[k]);p.appendChild(e);return e;};
+const defs=el(svg,'defs',{});
+const pat=el(defs,'pattern',{id:'hatch',width:'6',height:'6',patternUnits:'userSpaceOnUse',patternTransform:'rotate(45)'});
+el(pat,'line',{x1:0,y1:0,x2:0,y2:6,stroke:'var(--s-proc)','stroke-width':2});
+const MM=n=>(n/1e6).toLocaleString('en-US',{maximumFractionDigits:1});
+for(const v of [0,500e6,1000e6]){const y=base-(base-top)*v/yMax;
+  el(svg,'line',{x1:padL,x2:W-10,y1:y,y2:y,stroke:'var(--line)','stroke-width':v===0?1:.5});
+  const t=el(svg,'text',{x:padL-6,y:y+3.5,'text-anchor':'end','font-size':10,fill:'var(--muted)'});t.textContent=v/1e6;}
+const step=(W-padL-20)/DATA.length,bw=62;
+DATA.forEach((d,i)=>{
+  const x=padL+i*step+(step-bw)/2, total=d.fresh+d.cached;
+  const hT=(total/yMax)*(base-top), hF=(d.fresh/yMax)*(base-top);
+  const g=el(svg,'g',{});
+  const cachedRect=el(g,'rect',{x,y:base-hT,width:bw,height:Math.max(hT-hF-1,1),rx:3,fill:'var(--s-proc)'});
+  el(g,'rect',{x,y:base-hF,width:bw,height:Math.max(hF,1.5),fill:'var(--s-proc)'});
+  const lbl=el(g,'text',{x:x+bw/2,y:base-hT-6,'text-anchor':'middle','font-size':10.5,fill:'var(--ink2)'});
+  lbl.textContent=Math.round(total/1e6).toLocaleString('en-US');
+  el(g,'text',{x:x+bw/2,y:base+16,'text-anchor':'middle','font-size':10.5,fill:'var(--muted)'}).textContent=d.m;
+  el(g,'rect',{x:padL+i*step,y:top-14,width:step,height:base-top+14,fill:'transparent'});
+  const pct=(d.cached/total*100).toFixed(1);
+  g.addEventListener('mousemove',e=>{
+    cachedRect.setAttribute('fill','url(#hatch)');cachedRect.setAttribute('opacity','.55');
+    cachedRect.setAttribute('stroke','var(--s-proc)');cachedRect.setAttribute('stroke-dasharray','4 3');
+    const r=wrap.getBoundingClientRect();
+    tip.innerHTML='<b>'+d.full+'</b><br>Could have been wasted: <b>'+MM(d.cached)+'M</b> ('+pct+'%)<br>re-read context served from cache<br>Actually sent fresh: '+MM(d.fresh)+'M';
+    tip.style.display='block';
+    tip.style.left=Math.min(e.clientX-r.left+12,r.width-240)+'px';
+    tip.style.top=(e.clientY-r.top+14)+'px';});
+  g.addEventListener('mouseleave',()=>{
+    cachedRect.setAttribute('fill','var(--s-proc)');cachedRect.setAttribute('opacity','1');
+    cachedRect.removeAttribute('stroke');cachedRect.removeAttribute('stroke-dasharray');
+    tip.style.display='none';});
+  svg.appendChild(g);});
+el(svg,'text',{x:padL,y:236,'font-size':10,fill:'var(--muted)'}).textContent='March starts Mar 13; July covers only the first 9 days.';
+})();
+</script>
+</body>
+</html>
