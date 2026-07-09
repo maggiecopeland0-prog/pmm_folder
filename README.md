@@ -102,6 +102,34 @@ Each layer loads progressively. The agent never loads everything at once, only w
 
 **What this does:** Instead of writing one massive prompt that tries to cover everything, you split your context into layers that load based on what the task actually needs. A release note loads voice and terminology. An enablement deck also loads audience profiles. Claude only sees what's relevant.
 
+Here's the whole flow on one real task:
+
+```mermaid
+flowchart TD
+    TASK(["Your task: 'Write a release note for Feature X'"])
+    L0["<b>Layer 0: CLAUDE.md</b><br/>Where am I?<br/>Identity, critical rules, workspace map"]
+    L1["<b>Layer 1: CONTEXT.md</b><br/>Where do I go?<br/>Task routing table"]
+    L2["<b>Layer 2: release-notes/CONTEXT.md</b><br/>What do I do?<br/>Process, format, quality checks"]
+    L3["<b>Layer 3: _config/</b><br/>What rules apply?<br/>voice.md, terminology.md"]
+    L4["<b>Layer 4: Working inputs</b><br/>What am I working with?<br/>The PRD you provide"]
+    SKIP["Everything else stays unloaded:<br/>other workspaces, unrelated configs"]
+    OUT(["First draft that sounds like your team"])
+
+    TASK --> L0
+    TASK --> L4
+    L0 --> L1
+    L1 -->|routes to| L2
+    L1 -->|loads only the listed configs| L3
+    L1 -.->|ignores| SKIP
+    L2 --> OUT
+    L3 --> OUT
+    L4 --> OUT
+
+    style SKIP stroke-dasharray: 5 5
+```
+
+The dashed box is the point: for any single task, most of the workspace is never loaded. That's what keeps output focused and token use small.
+
 ---
 
 ## What's in This Repo
