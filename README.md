@@ -86,6 +86,20 @@ Without this system, every Claude session starts from zero. You paste your voice
 | More text in = more tokens used | Smaller, targeted context = fewer tokens |
 | Output sounds generic across deliverables | Each deliverable type has its own process and voice |
 
+### What this looks like at real scale
+
+Real numbers from my own workspace: since mid-March, Claude has processed about 2.3 billion tokens across roughly 18,000 assistant turns of my work, and 93.5% of that volume was served from the prompt cache. Stable, layered files are what make that possible: because the same CLAUDE.md and config files open every session, most of the context is reusable instead of re-sent.
+
+```mermaid
+xychart-beta
+    title "Tokens processed per month, millions"
+    x-axis ["Mar (from Mar 13)", "Apr", "May", "Jun", "Jul (to Jul 9)"]
+    y-axis "Millions of tokens" 0 --> 1100
+    bar [272, 343, 356, 1065, 243]
+```
+
+A note on the data: this is a sample from the local session logs on one machine, not a complete audit of every conversation. I started in Cowork and later added Claude Code, each tool keeps its own local logs, and these numbers combine both. June's spike is what a product launch month looks like.
+
 ---
 
 ## The Five-Layer Architecture
@@ -106,21 +120,20 @@ Here's the whole flow on one real task:
 
 ```mermaid
 flowchart TD
-    TASK(["Your task: 'Write a release note for Feature X'"])
-    L0["<b>Layer 0: CLAUDE.md</b><br/>Where am I?<br/>Identity, critical rules, workspace map"]
-    L1["<b>Layer 1: CONTEXT.md</b><br/>Where do I go?<br/>Task routing table"]
-    L2["<b>Layer 2: release-notes/CONTEXT.md</b><br/>What do I do?<br/>Process, format, quality checks"]
-    L3["<b>Layer 3: _config/</b><br/>What rules apply?<br/>voice.md, terminology.md"]
-    L4["<b>Layer 4: Working inputs</b><br/>What am I working with?<br/>The PRD you provide"]
-    SKIP["Everything else stays unloaded:<br/>other workspaces, unrelated configs"]
-    OUT(["First draft that sounds like your team"])
+    TASK(["Task: write a release note for Feature X"])
+    L0["Layer 0: CLAUDE.md<br/>identity, rules, workspace map"]
+    L1["Layer 1: CONTEXT.md<br/>task routing table"]
+    L2["Layer 2: release-notes/CONTEXT.md<br/>process, format, quality checks"]
+    L3["Layer 3: _config/<br/>voice.md, terminology.md"]
+    L4["Layer 4: working inputs<br/>the PRD you provide"]
+    SKIP["Everything else stays unloaded"]
+    OUT(["Accurate first draft"])
 
-    TASK --> L0
+    TASK --> L0 --> L1
+    L1 --> L2
+    L1 --> L3
+    L1 -.-> SKIP
     TASK --> L4
-    L0 --> L1
-    L1 -->|routes to| L2
-    L1 -->|loads only the listed configs| L3
-    L1 -.->|ignores| SKIP
     L2 --> OUT
     L3 --> OUT
     L4 --> OUT
@@ -128,7 +141,7 @@ flowchart TD
     style SKIP stroke-dasharray: 5 5
 ```
 
-The dashed box is the point: for any single task, most of the workspace is never loaded. That's what keeps output focused and token use small.
+CONTEXT.md routes the task to one workspace folder and loads only the config files listed for that task type. The dashed box is the point: for any single task, most of the workspace stays unloaded, which keeps output focused and token use small.
 
 ---
 
@@ -183,10 +196,10 @@ Open `CLAUDE.md` in your copied template. This is the file Claude reads first, e
 
 Fill in four sections:
 
-1. **Who I Am** — Your role, your team, your company, what your work covers
-2. **Workspace Map** — A text diagram showing your folder structure (update this as you add workspace folders)
-3. **How to Use This Workspace** — Keep the default instructions. They tell Claude to read files in order.
-4. **Critical Rules** — Non-negotiable rules that apply to every task, regardless of type
+1. **Who I Am**: Your role, your team, your company, what your work covers
+2. **Workspace Map**: A text diagram showing your folder structure (update this as you add workspace folders)
+3. **How to Use This Workspace**: Keep the default instructions. They tell Claude to read files in order.
+4. **Critical Rules**: Non-negotiable rules that apply to every task, regardless of type
 
 <details>
 <summary><strong>Example: What a filled-in CLAUDE.md looks like</strong></summary>
@@ -244,10 +257,10 @@ You'll also add a **Reference File Index** (what each config file contains and w
 
 Pick the deliverable type you produce most often. Rename the `workspace-1/` folder in your template to match it (e.g., `release-notes/`). Open its `CONTEXT.md` and fill in the stage contract:
 
-1. **Inputs Required** — What source material does this deliverable start from? (PRD, brief, data, previous output)
-2. **Process** — The step-by-step process you follow. Be specific: what do you do first, second, third?
-3. **Output Format** — What does the final deliverable look like? (Slack post, slide deck, Word doc)
-4. **Quality Checks** — What do you verify before publishing? (Terminology review, tone check, audience appropriateness)
+1. **Inputs Required**: What source material does this deliverable start from? (PRD, brief, data, previous output)
+2. **Process**: The step-by-step process you follow. Be specific: what do you do first, second, third?
+3. **Output Format**: What does the final deliverable look like? (Slack post, slide deck, Word doc)
+4. **Quality Checks**: What do you verify before publishing? (Terminology review, tone check, audience appropriateness)
 
 <details>
 <summary><strong>Example: A release notes stage contract</strong></summary>
@@ -331,13 +344,13 @@ This follows the same process as the manual walkthrough but Claude handles the f
 
 ## Why Transparency and Control Matter
 
-I came to this method with a specific perspective: I spent the last year bringing an AI-powered product to market, which meant I had to explain to customers how AI features worked, how the models processed their inputs, and what level of control they had over the outputs.
+I came to this method with a specific perspective: I spent the last year bringing an AI-powered product to market, explaining to customers how AI features worked, how the models processed their inputs, and what control they had over the outputs.
 
-When I turned around and started using AI for my own work, I wanted those same things. As a Product Marketer, I needed to see and control every part of how Claude was working: what context it used, what rules it followed, and where I could make changes.
+When I started using AI for my own work, I wanted those same things. As a Product Marketer, I wanted to see and shape every part of how Claude was working: what context it used, what rules it followed, and where I could make changes.
 
-That's what this system actually gives you. Every instruction Claude follows is a markdown file you can open, read, and edit with any text editor. There's no hidden logic, no proprietary configuration, and no technical abstraction. If the output isn't right, you can trace it to a specific file and fix it there.
+That's exactly what this system gives you. Every instruction Claude follows is a markdown file you can open, read, and edit with any text editor. Everything is visible, and everything is yours to change. Each output traces back to a specific file, so improving your results is as simple as improving the file.
 
-You can see exactly how your instructions connect to what Claude produces. If something's off in the output, you open the relevant file, make the change, and the next run reflects it. This transparency isn't a bonus feature. It's the core design principle.
+You can see exactly how your instructions connect to what Claude produces: open the relevant file, make the change, and the next run reflects it. This transparency is the core design principle, and it's what makes the system yours.
 
 ---
 
@@ -364,7 +377,7 @@ Originally built for Product Marketing at Meltwater. Designed to work for any te
 ## FAQ
 
 <details>
-<summary><strong>1. "Where do I actually use this — Claude Code, Cowork, or claude.ai?"</strong></summary>
+<summary><strong>1. "Where do I actually use this: Claude Code, Cowork, or claude.ai?"</strong></summary>
 
 Any of them. The folder system works anywhere Claude can read local files.
 
@@ -444,14 +457,14 @@ Yes. The workspace is a folder. Share it via Git, cloud storage, or a zip file. 
 
 **Background**
 
-- [Interpretable Context Methodology (ICM)](https://github.com/RinDig/Model-Workspace-Protocol-MWP-) — Van Clief & McDermott (2026), Eduba, University of Edinburgh
-- [Model Workspace Protocol (MWP)](https://github.com/RinDig/Model-Workspace-Protocol-MWP-) — Open-source protocol (MIT License)
+- [Interpretable Context Methodology (ICM)](https://github.com/RinDig/Model-Workspace-Protocol-MWP-), Van Clief & McDermott (2026), Eduba, University of Edinburgh
+- [Model Workspace Protocol (MWP)](https://github.com/RinDig/Model-Workspace-Protocol-MWP-), an open-source protocol (MIT License)
 
 ---
 
 ## Books on My Shelf
 
-A few of the books that shaped how I think about this work — from design systems to bureaucracy to the politics of algorithms.
+A few of the books that shaped how I think about this work, from design systems to bureaucracy to the politics of algorithms.
 
 <img width="600" alt="Books on my shelf: Co-Intelligence by Ethan Mollick, Looking Awry by Slavoj Žižek, The Design of Everyday Things by Donald Norman, The Utopia of Rules by David Graeber, Weapons of Math Destruction by Cathy O'Neil" src="screenshots/bookshelf.png" />
 
@@ -471,4 +484,4 @@ Co-authored with Claude, Anthropic
 
 ## License
 
-Open source — see [LICENSE](https://github.com/maggiecopeland0-prog/pmm_folder/blob/main/LICENSE).
+Open source. See [LICENSE](https://github.com/maggiecopeland0-prog/pmm_folder/blob/main/LICENSE).
